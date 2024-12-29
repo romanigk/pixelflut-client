@@ -36,9 +36,9 @@ private fun readServerResponse(client: Socket) {
     val reader = client.inputStream.bufferedReader(UTF_8)
     val timeoutDeadline = System.nanoTime() + TIMEOUT_NANOS
 
-    println("Server response:")
     while (System.nanoTime() <= timeoutDeadline) {
         if (reader.ready()) {
+            println("Server response:")
             val line = reader.readLine() ?: break
             println(line)
         }
@@ -54,11 +54,12 @@ fun sendPixelGraphicViaTelnet(
     try {
         Socket(host, port).use { socket ->
             val output = socket.getOutputStream()
-            pixelGraphic.forEach { row ->
-                row.forEach { pixel ->
-                    output.write(pixel)
+
+            pixelGraphic.forEachIndexed { y, row ->
+                row.forEachIndexed { x, pixel ->
+                    val rgbValue = String.format("%06X", pixel)
+                    output.write("PX $x $y $rgbValue\n".toByteArray())
                 }
-                output.write("\n".toByteArray()) // Move to next line
                 output.flush()
             }
         }

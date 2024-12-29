@@ -16,10 +16,10 @@ fun processPixelGraphic(
     port: Int,
     pixelGraphic: Array<Array<Int>>,
 ) {
-//    while (true) {
-//        sendPixelGraphicViaTelnet(host, port, pixelGraphic)
-//    }
     sendHelpCommandViaTelnet(host, port)
+    while (true) {
+        sendPixelGraphicViaTelnet(host, port, pixelGraphic)
+    }
 }
 
 fun loadPixelGraphic(filePath: String): Array<Array<Int>> {
