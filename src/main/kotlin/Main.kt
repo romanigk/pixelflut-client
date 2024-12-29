@@ -1,14 +1,23 @@
+const val HOST = "151.217.60.77"
+const val PORT = 1337
+const val FILE_PATH = "dezentrale2.png"
+
 fun main() {
-    val host = "151.217.60.77"
-    val port = 1337
-    // Read dezentrale2.png from resources folder
-    val pixelGraphic = readPixelGraphicFromFile("dezentrale2.png")
+    val pixelGraphic = loadPixelGraphic(FILE_PATH)
+    processPixelGraphic(HOST, PORT, pixelGraphic)
+}
+
+fun processPixelGraphic(
+    host: String,
+    port: Int,
+    pixelGraphic: Array<Array<Int>>,
+) {
     while (true) {
         sendPixelGraphicViaTelnet(host, port, pixelGraphic)
     }
 }
 
-fun readPixelGraphicFromFile(filePath: String): Array<Array<Int>> =
+fun loadPixelGraphic(filePath: String): Array<Array<Int>> =
     object {}
         .javaClass.classLoader
         .getResource(filePath)
