@@ -20,8 +20,8 @@ let
   };
 in
 stdenv.mkDerivation {
-  pname = "minimal-kotlin-nix-example";
-  version = "0.1.0";
+  pname = "pixelflut-client";
+  version = "0.0.1";
 
   src = ./.;
 
