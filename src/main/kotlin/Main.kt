@@ -32,16 +32,11 @@ fun loadPixelGraphic(filePath: String): Array<Array<Int>> {
             ?: throw IllegalArgumentException("File not found: $filePath")
     val image: BufferedImage = ImageIO.read(File(file))
 
-    // Konvertiere die Bilddaten in ein 2D-Array aus Integers
-    val width = image.width
-    val height = image.height
-    val pixelGraphic = Array(height) { Array(width) { 0 } }
-
-    for (y in 0 until height) {
-        for (x in 0 until width) {
-            pixelGraphic[y][x] = image.getRGB(x, y) and 0xFFFFFF // Extrahiere RGB-Wert (24-Bit)
+    // Verwende getRGB, um die Pixelmappe direkt zu erstellen
+    val pixelData = image.getRGB(0, 0, image.width, image.height, null, 0, image.width)
+    return Array(image.height) { y ->
+        Array(image.width) { x ->
+            pixelData[y * image.width + x] and 0xFFFFFF // Extrahiere RGB-Wert (24-Bit)
         }
     }
-
-    return pixelGraphic
 }
