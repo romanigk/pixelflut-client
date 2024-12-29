@@ -12,6 +12,7 @@ fun sendPixelGraphicViaTelnet(
                 output.write(pixel)
             }
             output.write("\n".toByteArray()) // Move to next line
+            output.flush() // Ensure data is sent after each row
         }
     }
 }
