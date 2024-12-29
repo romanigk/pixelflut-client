@@ -1,9 +1,5 @@
 import java.net.Socket
 
-private val name = "World"
-
-fun greet() = "Hello, $name!"
-
 fun sendPixelGraphicViaTelnet(
     host: String,
     port: Int,
